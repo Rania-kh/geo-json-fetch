@@ -1,12 +1,13 @@
 import './App.css';
+import GeolocationBox from './components/GeolocationBox';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <GeolocationBox />
     </div>
   );
 }
 
 export default App;
+
