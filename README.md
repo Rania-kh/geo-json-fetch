@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# Geo-JSON-Fetch
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project contains a React component named `GeolocationBox` designed for fetching GeoJSON data using the OpenStreetMap API based on user-input coordinates.
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+The `GeolocationBox` component fetches GeoJSON data for geographical coordinates specified by the user. It utilizes React and external libraries to perform asynchronous data fetching, validation, and display the fetched GeoJSON data in JSON format within the application.
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Install required dependencies:
+  yarn install 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+2. Import the `GeolocationBox` component into your React application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Implement the component by passing required props and leveraging its functionality for fetching GeoJSON data.
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The `GeolocationBox` component comprises a form that prompts users to input minimum and maximum longitude and latitude values. Upon submission, the component fetches GeoJSON data from the OpenStreetMap API based on the provided coordinates.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Dependencies
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- @mui/material
+- formik
+- yup
+- react
+- osmtogeojson
 
-### `npm run eject`
+## Components
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `GeolocationBox`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The `GeolocationBox` component fetches GeoJSON data and displays it in the application. It includes the following key functionalities:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Form for entering longitude and latitude values
+- LoadingButton to trigger data fetching
+- Display of fetched GeoJSON data in a JSON format
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `TextInput`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The `TextInput` component is a custom component or a wrapper around Material-UI's input field:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Rendering an input field in the UI.
+- Managing user input and changes.
+- Handling form validation or restrictions (e.g., accepting only certain types of input).
+
+
+
+## Contributions
+Contributions, issues, and feature requests are welcome. Feel free to submit pull requests or open issues in the repository.
+
+## License
+This project is licensed under the MIT License.
+
+
+This README provides an overview of the project, its components, usage instructions, dependencies, and encourages contributions. Feel free to adjust or expand it based on your project's specific details and requirements.
