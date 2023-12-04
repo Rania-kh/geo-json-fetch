@@ -2,6 +2,7 @@ import axios from "axios";
 import { FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
 import osmtogeojson from "osmtogeojson";
 import React, { useState } from "react";
+import './GeolocationBox.css';
 
 function GeolocationBox() {
     const [coordinates, setCoordinates] = useState("");
@@ -28,15 +29,17 @@ function GeolocationBox() {
     };
 
     return (
-        <div>
+        <div className="geolocation-box">
             <h2>Get GeoJSON Features</h2>
-            <input
-                type="text"
-                value={coordinates}
-                onChange={handleCoordinatesChange}
-                placeholder="Enter coordinates (min_lon,min_lat,max_lon,max_lat)"
-            />
-            <button onClick={fetchGeoJSONData}>Fetch GeoJSON Data</button>
+            <div className="input-container">
+                <input
+                    type="text"
+                    value={coordinates}
+                    onChange={handleCoordinatesChange}
+                    placeholder="Enter coordinates (min_lon,min_lat,max_lon,max_lat)"
+                />
+                <button onClick={fetchGeoJSONData}>Fetch GeoJSON Data</button>
+            </div>
             {geoJSONData && <pre>{JSON.stringify(geoJSONData, null, 2)}</pre>}
         </div>
     );
