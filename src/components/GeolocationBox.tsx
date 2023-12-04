@@ -1,46 +1,52 @@
-import axios from "axios";
 import { FeatureCollection, GeoJsonProperties, Geometry } from "geojson";
-import osmtogeojson from "osmtogeojson";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Address } from "../interfaces/map";
+import { fetchGeoJSONData } from "../utils/mapApi";
 import './GeolocationBox.css';
+import { TextInput } from "./TextInput";
+
 
 function GeolocationBox() {
-    const [coordinates, setCoordinates] = useState("");
-    const [geoJSONData, setGeoJSONData] = useState<FeatureCollection<Geometry, GeoJsonProperties> | null>(
-        null
-    );
+    const [geoJSONData, setGeoJSONData] = useState<FeatureCollection<Geometry, GeoJsonProperties> | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [address, setAddress] = useState<Address>({
+        min_lon: '',
+        min_lat: '',
+        max_lon: '',
+        max_lat: ''
+    });
 
-    const handleCoordinatesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCoordinates(event.target.value);
+    const fetchGeoJSONDataHandler = async (): Promise<void> => {
+        try {
+            const { min_lon, min_lat, max_lon, max_lat } = address;
+            const geoJSONData = await fetchGeoJSONData(min_lon, min_lat, max_lon, max_lat);
+            setGeoJSONData(geoJSONData);
+            setError(null);
+        } catch (error) {
+            setError('Please check your data and try again!');
+            setGeoJSONData(null);
+        }
     };
 
-    const fetchGeoJSONData = async () => {
-        try {
-            const response = await axios.get(
-                `https://www.openstreetmap.org/api/0.6/map?bbox=${coordinates}`
-            );
-            const osmData = response.data;
-
-            const geoJSONData = osmtogeojson(osmData) as FeatureCollection<Geometry, GeoJsonProperties>;
-            setGeoJSONData(geoJSONData);
-        } catch (error) {
-            console.error(error);
-        }
+    const updateAddressField = (field: keyof Address) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        setAddress(prevAddress => ({ ...prevAddress, [field]: value }));
     };
 
     return (
         <div className="geolocation-box">
             <h2>Get GeoJSON Features</h2>
-            <div className="input-container">
-                <input
-                    type="text"
-                    value={coordinates}
-                    onChange={handleCoordinatesChange}
-                    placeholder="Enter coordinates (min_lon,min_lat,max_lon,max_lat)"
-                />
-                <button onClick={fetchGeoJSONData}>Fetch GeoJSON Data</button>
-            </div>
+            <form>
+                <div className="form-container">
+                    <TextInput field="min_lon" onChange={updateAddressField} placeholder="Minimum Longitude" value={address.min_lon} />
+                    <TextInput field="min_lat" onChange={updateAddressField} placeholder="Minimum Latitude" value={address.min_lat} />
+                    <TextInput field="max_lon" onChange={updateAddressField} placeholder="Maximum Longitude" value={address.max_lon} />
+                    <TextInput field="max_lat" onChange={updateAddressField} placeholder="Maximum Latitude" value={address.max_lat} />
+                </div>
+            </form>
+            <button onClick={fetchGeoJSONDataHandler}>Fetch GeoJSON Data</button>
             {geoJSONData && <pre>{JSON.stringify(geoJSONData, null, 2)}</pre>}
+            {error && <div className="error-message">Error: {error}</div>}
         </div>
     );
 }
