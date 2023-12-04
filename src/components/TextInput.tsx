@@ -1,5 +1,3 @@
-// TextInput.tsx
-
 import { TextField, TextFieldProps } from '@mui/material';
 import { FieldAttributes, useField } from 'formik';
 import React from 'react';

@@ -44,16 +44,6 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 96%;
-    margin-left: 0.3rem;
-}
 
 button:hover {
     background-color: #45a049;
