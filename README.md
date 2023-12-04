@@ -8,13 +8,14 @@ The `GeolocationBox` component fetches GeoJSON data for geographical coordinates
 
 ## Setup
 
-1. Install required dependencies:
-  yarn install 
+1. Clone the repository:
+  ````git clone https://github.com/your-username/your-repo.git````
 
+2. Install required dependencies:
+  yarn install
 
-2. Import the `GeolocationBox` component into your React application.
-
-3. Implement the component by passing required props and leveraging its functionality for fetching GeoJSON data.
+3. run the app
+   yarn start
 
 ## Usage
 
